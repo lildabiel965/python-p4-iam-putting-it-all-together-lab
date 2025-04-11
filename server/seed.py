@@ -47,13 +47,14 @@ with app.app_context():
     for i in range(100):
         instructions = fake.paragraph(nb_sentences=8)
         
+        user = rc(users)
         recipe = Recipe(
             title=fake.sentence(),
             instructions=instructions,
             minutes_to_complete=randint(15,90),
+            user_id=user.id  
         )
 
-        recipe.user = rc(users)
 
         recipes.append(recipe)
 
@@ -61,3 +62,4 @@ with app.app_context():
     
     db.session.commit()
     print("Complete.")
+    
